@@ -24,7 +24,7 @@ def main():
 
         st.session_state.debit_card = DebitCard(card_number, pin)
 
-    forget_details = st.button('Forget Details')
+    forget_details = st.button('Erase Details')
     if forget_details:
         st.session_state.debit_card = None
 
@@ -60,7 +60,8 @@ def main():
             st.success(f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
             break
 
-st.warning('When forgetting details click button two times.')
 
 if __name__ == "__main__":
     main()
+
+st.warning('When clicking erase details click button two times.')
