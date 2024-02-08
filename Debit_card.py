@@ -43,7 +43,7 @@ def main():
             return
 
         if st.session_state.debit_card.balance !=0:
-            break
+            pass
         else:
             initial_money = random.randint(10, 100) * 1000  # Random amount between Rs. 10,000 and Rs. 100,000
             st.session_state.debit_card.balance += initial_money
