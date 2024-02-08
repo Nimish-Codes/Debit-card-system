@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import sys
 
 class DebitCard:
     def __init__(self, card_number, pin, balance=0):
@@ -61,5 +60,4 @@ def main():
     st.write(f'currently using card number: {card_number}')
 
 if __name__ == "__main__":
-    sys.stderr = open('/dev/null', 'w')
     main()
