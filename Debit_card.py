@@ -60,5 +60,7 @@ def main():
             st.success(f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
             break
 
+st.warning('When forgetting details click button two times.')
+
 if __name__ == "__main__":
     main()
