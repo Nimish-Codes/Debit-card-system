@@ -14,13 +14,13 @@ def main():
     st.title("Debit Card System")
 
     if st.session_state.debit_card is None:
-        card_number = st.text_input("Enter your debit card number (16 digits):", key="card_number")
+        card_number = st.text_input("Enter your debit card number (16 digits):", key="card_number_1")
         while not card_number.isdigit() or len(card_number) != 16:
-            card_number = st.text_input("Invalid input. Please enter 16-digit debit card number:", key="card_number")
+            card_number = st.text_input("Invalid input. Please enter 16-digit debit card number:", key="card_number_1")
 
-        pin = st.text_input("Set your card PIN (6 digits):", type="password", key="pin")
+        pin = st.text_input("Set your card PIN (6 digits):", type="password", key="pin_1")
         while not pin.isdigit() or len(pin) != 6:
-            pin = st.text_input("Invalid input. Please enter 6-digit PIN:", type="password", key="pin")
+            pin = st.text_input("Invalid input. Please enter 6-digit PIN:", type="password", key="pin_1")
 
         st.session_state.debit_card = DebitCard(card_number, pin)
 
@@ -50,7 +50,7 @@ def main():
         st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
 
         for i in range(3):
-            amount = st.number_input("Enter the amount you want to withdraw:", min_value=0, key=f"amount_{i}")
+            amount = st.number_input("Enter the amount you want to withdraw:", min_value=0.01, key=f"amount_{i}")
             if amount > st.session_state.debit_card.balance:
                 st.error("Insufficient funds. Please try again with a lower amount.")
                 continue
