@@ -29,8 +29,6 @@ def main():
         st.session_state.debit_card = None
 
     if st.session_state.debit_card:
-        st.write(f"Your debit card number: {st.session_state.debit_card.card_number}")
-
         for i in range(3):
             entered_pin = st.text_input("Verify your card PIN:", type="password", key=f"entered_pin_{i}")
             if entered_pin == st.session_state.debit_card.pin:
@@ -56,8 +54,7 @@ def main():
                 continue
 
             st.session_state.debit_card.balance -= amount
-            st.success(f"Debit card number: {st.session_state.debit_card.card_number}\n"
-                       f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
+            st.success(f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
             break
 
 if __name__ == "__main__":
