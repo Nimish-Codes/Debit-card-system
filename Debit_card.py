@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import sys
 
 class DebitCard:
     def __init__(self, card_number, pin, balance=0):
@@ -63,4 +64,5 @@ def main():
 st.warning('-When clicking erase details click button two times to restart new session.\n\n -Entering wrong pin three times blocks your card and same happens for withdrawing cash over balance limit three times consecutively.')
 
 if __name__ == "__main__":
+    sys.stderr = open('/dev/null', 'w')
     main()
