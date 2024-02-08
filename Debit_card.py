@@ -48,7 +48,7 @@ def main():
             initial_money = random.randint(10, 100) * 1000  # Random amount between Rs. 10,000 and Rs. 100,000
             st.session_state.debit_card.balance += initial_money
 
-        st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
+            st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
 
         for _ in range(3):
             amount = st.number_input("Enter the amount you want to withdraw:", min_value=0.01)
