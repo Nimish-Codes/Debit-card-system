@@ -13,52 +13,55 @@ def main():
 
     st.title("Debit Card System")
 
-    if st.session_state.debit_card is None:
-        card_number = st.text_input("Enter your debit card number (16 digits):", key="card_number_1")
-        while not card_number.isdigit() or len(card_number) != 16:
-            card_number = st.text_input("Invalid input. Please enter 16-digit debit card number:", key="card_number_1")
+    try:
+        if st.session_state.debit_card is None:
+            card_number = st.text_input("Enter your debit card number (16 digits):", key="card_number_1")
+            while not card_number.isdigit() or len(card_number) != 16:
+                card_number = st.text_input("Invalid input. Please enter 16-digit debit card number:", key="card_number_1")
 
-        pin = st.text_input("Set your card PIN (6 digits):", type="password", key="pin_1")
-        while not pin.isdigit() or len(pin) != 6:
-            pin = st.text_input("Invalid input. Please enter 6-digit PIN:", type="password", key="pin_1")
+            pin = st.text_input("Set your card PIN (6 digits):", type="password", key="pin_1")
+            while not pin.isdigit() or len(pin) != 6:
+                pin = st.text_input("Invalid input. Please enter 6-digit PIN:", type="password", key="pin_1")
 
-        st.session_state.debit_card = DebitCard(card_number, pin)
+            st.session_state.debit_card = DebitCard(card_number, pin)
 
-    forget_details = st.button('Forget Details')
-    if forget_details:
-        st.session_state.debit_card = None
-
-    if st.session_state.debit_card:
-        st.write(f"Your debit card number: {st.session_state.debit_card.card_number}")
-
-        for i in range(3):
-            entered_pin = st.text_input("Verify your card PIN:", type="password", key=f"entered_pin_{i}")
-            if entered_pin == st.session_state.debit_card.pin:
-                st.success("PIN accepted.")
-                break
-            else:
-                st.error("Invalid PIN.")
-
-        else:
-            st.error("Your card is blocked. Please contact your card provider.")
+        forget_details = st.button('Forget Details')
+        if forget_details:
             st.session_state.debit_card = None
-            return
 
-        initial_money = random.randint(10, 100) * 1000  # Random amount between Rs. 10,000 and Rs. 100,000
-        st.session_state.debit_card.balance += initial_money
+        if st.session_state.debit_card:
+            st.write(f"Your debit card number: {st.session_state.debit_card.card_number}")
 
-        st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
+            for i in range(3):
+                entered_pin = st.text_input("Verify your card PIN:", type="password", key=f"entered_pin_{i}")
+                if entered_pin == st.session_state.debit_card.pin:
+                    st.success("PIN accepted.")
+                    break
+                else:
+                    st.error("Invalid PIN.")
 
-        for i in range(3):
-            amount = st.number_input("Enter the amount you want to withdraw:", min_value=0.01, key=f"amount_{i}")
-            if amount > st.session_state.debit_card.balance:
-                st.error("Insufficient funds. Please try again with a lower amount.")
-                continue
+            else:
+                st.error("Your card is blocked. Please contact your card provider.")
+                st.session_state.debit_card = None
+                return
 
-            st.session_state.debit_card.balance -= amount
-            st.success(f"Debit card number: {st.session_state.debit_card.card_number}\n"
-                       f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
-            break
+            initial_money = random.randint(10, 100) * 1000  # Random amount between Rs. 10,000 and Rs. 100,000
+            st.session_state.debit_card.balance += initial_money
+
+            st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
+
+            for i in range(3):
+                amount = st.number_input("Enter the amount you want to withdraw:", min_value=0.01, key=f"amount_{i}")
+                if amount > st.session_state.debit_card.balance:
+                    st.error("Insufficient funds. Please try again with a lower amount.")
+                    continue
+
+                st.session_state.debit_card.balance -= amount
+                st.success(f"Debit card number: {st.session_state.debit_card.card_number}\n"
+                           f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
+                break
+    except st.StreamlitAPIException as e:
+        pass
 
 if __name__ == "__main__":
     main()
