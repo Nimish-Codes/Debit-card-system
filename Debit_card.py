@@ -60,7 +60,7 @@ def main():
                 st.success(f"Debit card number: {st.session_state.debit_card.card_number}\n"
                            f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
                 break
-    except st.StreamlitAPIException as e:
+    except Exception as e:
         pass
 
 if __name__ == "__main__":
