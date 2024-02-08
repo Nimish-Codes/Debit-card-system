@@ -61,7 +61,7 @@ def main():
             st.success(f"You withdrew Rs. {amount}. Your new balance is: Rs. {st.session_state.debit_card.balance}")
             break
 
-st.warning('-When clicking erase details click button two times to restart new session.\n\n -Entering wrong pin three times blocks your card and same happens for withdrawing cash over balance limit three times consecutively.')
+st.warning('-When clicking erase details click button two times to restart new session.\n\n -Entering wrong pin three times blocks your card and same happens for withdrawing cash over balance limit three times consecutively.\n\n Igore Error below that doesn't affect functonalities of this app, it will get countered in coming days.')
 
 if __name__ == "__main__":
     sys.stderr = open('/dev/null', 'w')
