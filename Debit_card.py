@@ -51,7 +51,7 @@ def main():
             st.write(f"Your current balance is: Rs. {st.session_state.debit_card.balance}")
 
         for _ in range(3):
-            amount = st.number_input("Enter the amount you want to withdraw:", min_value=0.01)
+            amount = st.number_input("Enter the amount you want to withdraw:", min_value=0)
             if amount > st.session_state.debit_card.balance:
                 st.error("Insufficient funds. Please try again with a lower amount.")
                 continue
